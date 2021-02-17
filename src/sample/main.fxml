@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<GridPane alignment="center" hgap="10" prefHeight="300.0" prefWidth="1000.0" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+   <rowConstraints>
+      <RowConstraints percentHeight="20.0" />
+      <RowConstraints minHeight="10.0" percentHeight="80.0" prefHeight="30.0" />
+      <RowConstraints minHeight="10.0" percentHeight="13.0" prefHeight="30.0" />
+   </rowConstraints>
+   <columnConstraints>
+      <ColumnConstraints minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+      <ColumnConstraints minWidth="10.0" percentWidth="50.0" prefWidth="100.0" />
+   </columnConstraints>
+   <children>
+      <Label text="Inventory Management System">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+         <padding>
+            <Insets left="20.0" />
+         </padding>
+         <GridPane.margin>
+            <Insets top="10.0" />
+         </GridPane.margin>
+      </Label>
+      <Pane prefHeight="244.0" prefWidth="445.0" style="-fx-border-width: 2; -fx-border-color: black; -fx-border-radius: 10;" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets left="20.0" right="30.0" />
+         </GridPane.margin>
+         <children>
+            <TableView layoutX="10.0" layoutY="40.0" prefHeight="124.0" prefWidth="425.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Part ID" />
+                <TableColumn text="Part Name" />
+                  <TableColumn prefWidth="110.0" text="Inventory Level" />
+                  <TableColumn prefWidth="159.0" text="Price/ Cost Per Unit" />
+              </columns>
+            </TableView>
+            <Label layoutX="35.0" layoutY="23.0" text="Parts">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutX="223.0" layoutY="11.0" prefHeight="25.0" prefWidth="183.0" promptText="Search by Part ID or Other Attribute" />
+            <ButtonBar layoutX="166.0" layoutY="158.0" prefHeight="40.0" prefWidth="241.0">
+              <buttons>
+                  <Button mnemonicParsing="false" text="Add" />
+                <Button mnemonicParsing="false" text="Modify" />
+                  <Button mnemonicParsing="false" text="Delete" />
+              </buttons>
+            </ButtonBar>
+         </children>
+      </Pane>
+      <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-border-color: black; -fx-border-width: 2; -fx-border-radius: 10;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+         <GridPane.margin>
+            <Insets right="30.0" />
+         </GridPane.margin>
+         <children>
+            <TableView layoutX="13.0" layoutY="39.0" prefHeight="124.0" prefWidth="439.0">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Product ID" />
+                <TableColumn prefWidth="115.0" text="Product Name" />
+                  <TableColumn prefWidth="112.0" text="Inventory Level" />
+                  <TableColumn prefWidth="136.0" text="Price/ Cost Per Unit" />
+              </columns>
+            </TableView>
+            <Label layoutX="26.0" layoutY="23.0" text="Products">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <TextField layoutX="256.0" layoutY="11.0" prefHeight="25.0" prefWidth="190.0" promptText="Search by Product ID or Other Attribute" />
+            <ButtonBar layoutX="186.0" layoutY="158.0" prefHeight="40.0" prefWidth="248.0">
+              <buttons>
+                  <Button mnemonicParsing="false" text="Add" />
+                  <Button mnemonicParsing="false" text="Modify" />
+                <Button mnemonicParsing="false" text="Delete" />
+              </buttons>
+            </ButtonBar>
+         </children>
+      </Pane>
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+        <buttons>
+          <Button cancelButton="true" minWidth="44.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="75.0" text="Exit" />
+        </buttons>
+      </ButtonBar>
+      
+   </children>
+</GridPane>
