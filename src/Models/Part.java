@@ -1,4 +1,4 @@
-package sample;
+package Models;
 /**
  *
  * This is the Part Class which products are composed of.
