@@ -1,4 +1,4 @@
-package Models;
+package models;
 /**
  *
  * This is the Part Class which products are composed of.

@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 /**
  * This is the InHouse class, inherited from the abstract class Part

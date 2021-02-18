@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 /**
  * This is the Outscourced class, inherited from the abstract class Part
