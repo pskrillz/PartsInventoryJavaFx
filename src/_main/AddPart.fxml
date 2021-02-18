@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane prefHeight="545.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="_main.AddPartController">
    <children>
       <Label layoutX="54.0" layoutY="51.0" text="Add Part">
@@ -14,11 +13,11 @@
       </Label>
       <!-- The toggle Group needs to be defined like this-->
       <fx:define>
-         <ToggleGroup fx:id="partType"></ToggleGroup>
+         <ToggleGroup fx:id="partType" />
       </fx:define>
-      <RadioButton layoutX="164.0" layoutY="51.0" mnemonicParsing="false" text="In-House" toggleGroup="$partType" selected="true"/>
-      <RadioButton layoutX="300.0" layoutY="51.0" mnemonicParsing="false" text="Outsourced" toggleGroup="$partType" onAction="#switchToOutsource"/>
-      <TextField layoutX="164.0" layoutY="133.0" />
+      <RadioButton fx:id="radioInHouse" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" onAction="#toggleIsNotOutsourced" selected="true" text="In-House" toggleGroup="$partType"/>
+      <RadioButton fx:id="radioOutsourced" layoutX="300.0" layoutY="51.0" mnemonicParsing="false" onAction="#toggleIsOutsourced" text="Outsourced" toggleGroup="$partType" />
+      <TextField disable="true" layoutX="164.0" layoutY="133.0" />
       <TextField layoutX="164.0" layoutY="172.0" />
       <TextField layoutX="164.0" layoutY="208.0" />
       <TextField layoutX="164.0" layoutY="248.0" />
@@ -32,7 +31,7 @@
       <Label layoutX="71.0" layoutY="212.0" text="Inv" />
       <Label layoutX="71.0" layoutY="252.0" text="Price/Cost" />
       <Label layoutX="71.0" layoutY="290.0" text="Max" />
-      <Label layoutX="71.0" layoutY="326.0" text="Machine ID" />
+      <Label layoutX="71.0" layoutY="326.0" text="Machine ID" fx:id="partTypeSpecificField" />
       <Label layoutX="342.0" layoutY="290.0" text="Min" />
    </children>
 </AnchorPane>

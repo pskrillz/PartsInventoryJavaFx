@@ -4,7 +4,6 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-
 <AnchorPane prefHeight="545.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.views.AddPart">
     <children>
         <Label layoutX="54.0" layoutY="51.0" text="Modify Part">
@@ -14,7 +13,7 @@
         </Label>
         <RadioButton layoutX="164.0" layoutY="51.0" mnemonicParsing="false" text="In-House" />
         <RadioButton layoutX="300.0" layoutY="51.0" mnemonicParsing="false" text="Outsourced" />
-        <TextField layoutX="164.0" layoutY="133.0" />
+        <TextField layoutX="164.0" layoutY="133.0" promptText="Auto Generated" />
         <TextField layoutX="164.0" layoutY="172.0" />
         <TextField layoutX="164.0" layoutY="208.0" />
         <TextField layoutX="164.0" layoutY="248.0" />
