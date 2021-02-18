@@ -1,16 +1,20 @@
 package _main;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.stage.Stage;
 
 public class AddPartController {
 
-    @FXML
-   // public RadioButton radioInHouse;
-   // public RadioButton radioOutsourced;
-    public Label partTypeSpecificField;
+    // public RadioButton radioInHouse;
+    // public RadioButton radioOutsourced;
 
+    @FXML
+    private Label partTypeSpecificField;
+    @FXML
+    private Button cancelButton;
 
 // In-House parts are default.
     public boolean isOutsourced = false;
@@ -35,6 +39,19 @@ public class AddPartController {
       }
     }
 
+
+    // TODO: finish save button, but added close window to it for now
+    public void savePart(){
+
+        this.closeWindow();
+    }
+
+
+
+    public void closeWindow(){
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
 
 
 
