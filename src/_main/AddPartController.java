@@ -1,4 +1,4 @@
-package controllers;
+package _main;
 
 public class AddPartController {
 

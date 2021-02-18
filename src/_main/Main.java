@@ -12,7 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent main = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Inventory Management V1");
-        primaryStage.setScene(new Scene(main, 1000, 375));
+        primaryStage.setScene(new Scene(main, 1010, 375));
         primaryStage.show();
     }
 
