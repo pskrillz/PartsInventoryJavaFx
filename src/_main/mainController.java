@@ -36,9 +36,9 @@ public class mainController {
     public void openAddPart() throws IOException {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPart.fxml"));
-        Parent root1 = (Parent) fxmlLoader.load();
+        Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root1));
+        stage.setScene(new Scene(root));
         stage.show();
     }
 
@@ -51,9 +51,9 @@ public class mainController {
     public void openModifyPart() throws Exception {
 
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
-        Parent root2 = (Parent) fxmlLoader.load();
+        Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
-        stage.setScene(new Scene(root2));
+        stage.setScene(new Scene(root));
         stage.show();
     }
 

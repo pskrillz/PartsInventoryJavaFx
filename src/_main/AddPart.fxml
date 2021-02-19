@@ -15,18 +15,16 @@
       <fx:define>
          <ToggleGroup fx:id="partType" />
       </fx:define>
-      <RadioButton fx:id="radioInHouse" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" onAction="#toggleIsNotOutsourced" selected="true" text="In-House">
-         <toggleGroup>
-            <ToggleGroup fx:id="partType" />
-         </toggleGroup></RadioButton>
+      <RadioButton fx:id="radioInHouse" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" onAction="#toggleIsNotOutsourced"  selected="true" text="In-House" toggleGroup="$partType"/>
+      <!-- weird bug with toggle group code keeps appearing here-->
       <RadioButton fx:id="radioOutsourced" layoutX="300.0" layoutY="51.0" mnemonicParsing="false" onAction="#toggleIsOutsourced" text="Outsourced" toggleGroup="$partType" />
       <TextField disable="true" layoutX="164.0" layoutY="133.0" promptText="Auto Generated" />
-      <TextField layoutX="164.0" layoutY="172.0" />
-      <TextField layoutX="164.0" layoutY="208.0" />
-      <TextField layoutX="164.0" layoutY="248.0" />
-      <TextField layoutX="164.0" layoutY="286.0" />
-      <TextField layoutX="164.0" layoutY="322.0" />
-      <TextField layoutX="393.0" layoutY="286.0" />
+      <TextField layoutX="164.0" layoutY="172.0" fx:id="nameField"/>
+      <TextField layoutX="164.0" layoutY="208.0" fx:id="invField"/>
+      <TextField layoutX="164.0" layoutY="248.0" fx:id="priceField"/>
+      <TextField layoutX="164.0" layoutY="286.0" fx:id="maxField"/>
+      <TextField layoutX="164.0" layoutY="322.0" fx:id="uniqueField"/>
+      <TextField layoutX="393.0" layoutY="286.0" fx:id="minField"/>
       <Button layoutX="332.0" layoutY="383.0" mnemonicParsing="false" onAction="#savePart" text="Save" />
       <Button fx:id="cancelButton" layoutX="393.0" layoutY="383.0" mnemonicParsing="false" onAction="#closeWindow" text="Cancel" />
       <Label layoutX="73.0" layoutY="137.0" text="ID" />
@@ -34,7 +32,7 @@
       <Label layoutX="71.0" layoutY="212.0" text="Inv" />
       <Label layoutX="71.0" layoutY="252.0" text="Price/Cost" />
       <Label layoutX="71.0" layoutY="290.0" text="Max" />
-      <Label fx:id="partTypeSpecificField" layoutX="71.0" layoutY="326.0" text="Machine ID" />
+      <Label fx:id="partTypeSpecificLabel" layoutX="71.0" layoutY="326.0" text="Machine ID" />
       <Label layoutX="342.0" layoutY="290.0" text="Min" />
    </children>
 </AnchorPane>

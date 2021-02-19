@@ -7,6 +7,11 @@ public class Inventory {
     private ObservableList<Part> allParts = FXCollections.observableArrayList();
     private ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
+    public Inventory(ObservableList<Part> allParts, ObservableList<Product> allProducts) {
+        this.allParts = allParts;
+        this.allProducts = allProducts;
+    }
+
     /**
      * add new parts and products to inventory
      * @param newPart
@@ -121,5 +126,14 @@ public class Inventory {
     public ObservableList<Product> getAllProducts(){
         return allProducts;
     }
+
+
+
+
+
+
+
+
+
 
 }
