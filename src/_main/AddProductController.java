@@ -4,7 +4,7 @@ public class AddProductController {
 
 
     /**
-     * Number generator
+     * Number generator for products
      */
     public static int productId = 0;
     public static int generateProductId(){

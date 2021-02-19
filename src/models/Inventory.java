@@ -4,10 +4,9 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
-    public int partId = -1;
 
-    private ObservableList<Part> allParts = FXCollections.observableArrayList();
-    private ObservableList<Product> allProducts = FXCollections.observableArrayList();
+    private static ObservableList<Part> allParts = FXCollections.observableArrayList();
+    private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
     public Inventory(ObservableList<Part> allParts, ObservableList<Product> allProducts) {
         this.allParts = allParts;
@@ -15,14 +14,18 @@ public class Inventory {
     }
 
     /**
-     * add new parts and products to inventory
+     * Add new part to inventory
      * @param newPart
      */
 
-    public void addPart(Part newPart){
+    public static void addPart(Part newPart){
         allParts.add(newPart);
     }
 
+    /**
+     * Add new product to inventory
+     * @param newProduct
+     */
     public void addProduct(Product newProduct){
         allProducts.add(newProduct);
     }
@@ -116,7 +119,7 @@ public class Inventory {
      * @return
      */
 
-    public ObservableList<Part> getAllParts(){
+    public static ObservableList<Part> getAllParts(){
         return allParts;
     }
 
@@ -125,19 +128,19 @@ public class Inventory {
      * @return
      */
 
-    public ObservableList<Product> getAllProducts(){
+    public static ObservableList<Product> getAllProducts(){
         return allProducts;
     }
 
 
 
 
-
+/*
     public int generatePartId(){
         partId++;
         return partId;
     }
-
+*/
 
 
 

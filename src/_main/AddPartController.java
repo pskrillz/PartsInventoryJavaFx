@@ -10,6 +10,8 @@ import models.InHouse;
 import models.Outsourced;
 import models.Inventory;
 
+import java.io.IOException;
+
 public class AddPartController {
 
    // public int partId = -1;
@@ -61,8 +63,8 @@ public class AddPartController {
      * This method saves all the input fields, and casts the data types to the right types for
      * each associated part's class constructors.
      */
-
-    public void savePart(){
+@FXML
+    public void savePart() throws IOException {
 
 
         String name = this.nameField.getText();
@@ -76,11 +78,23 @@ public class AddPartController {
 
         if (isOutsourced == false){
              InHouse inHousePart = new InHouse(generatePartId(), name, price, stock, min, max, Integer.parseInt(uniqueField));
+
+
+            /**
+             * Error: "Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException"
+             * Cause Theories (deductive): Something to do with threads, handling exceptions, OOP on the static model, or me maybe using the same field for both part types.
+             */
+                 Inventory.addPart(inHousePart);
+
+
+
             System.out.println(inHousePart.getId());
           //  System.out.println(generatePartId());
 
         } else if (isOutsourced){
             Outsourced outsourcedPart = new Outsourced(1, name, price, stock, min, max, uniqueField);
+            models.Inventory.addPart(outsourcedPart);
+
             System.out.println(outsourcedPart);
         }
 
