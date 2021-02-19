@@ -11,9 +11,11 @@ public class numberGenerator {
         return productId;
     }
 
-
+/*
     public int generatePartId(){
         partId++;
         return partId;
     }
+
+ */
 }

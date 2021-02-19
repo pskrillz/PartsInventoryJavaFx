@@ -4,6 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class Inventory {
+    public int partId = -1;
+
     private ObservableList<Part> allParts = FXCollections.observableArrayList();
     private ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
@@ -131,7 +133,10 @@ public class Inventory {
 
 
 
-
+    public int generatePartId(){
+        partId++;
+        return partId;
+    }
 
 
 

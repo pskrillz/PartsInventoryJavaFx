@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import models.InHouse;
 import models.Outsourced;
 import models.Inventory;
-import _main.numberGenerator;
 
 public class AddPartController {
 
@@ -73,14 +72,11 @@ public class AddPartController {
         int min = Integer.parseInt(this.minField.getText());
         String uniqueField = this.uniqueField.getText();
 
-        /**
-         * Bug: "Non-static variable cannot be referenced from a static context"
-         * Problem: Trying to access method to generate and keep track of ID's for parts and products saved in memory.
-          */
+
 
         if (isOutsourced == false){
-            // InHouse inHousePart = new InHouse(_main.numberGenerator.generatePartId(), name, price, stock, min, max, Integer.parseInt(uniqueField));
-          //  System.out.println(inHousePart.getId());
+             InHouse inHousePart = new InHouse(generatePartId(), name, price, stock, min, max, Integer.parseInt(uniqueField));
+            System.out.println(inHousePart.getId());
           //  System.out.println(generatePartId());
 
         } else if (isOutsourced){
@@ -93,7 +89,17 @@ public class AddPartController {
         this.closeWindow();
     }
 
+    /**
+     * Bug: "Non-static variable cannot be referenced from a static context"
+     * Problem: Trying to access method to generate and keep track of ID's for parts and products persistently saved in memory.
+     * Resolution: Solution is to create a static variable-method pair to be shared between all members of the class.
+     */
 
+   public static int partId = 0;
+    public static int generatePartId(){
+        partId++;
+        return partId;
+    }
 
 
 

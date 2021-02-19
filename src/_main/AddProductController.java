@@ -1,18 +1,14 @@
 package _main;
 
 public class AddProductController {
- //   public int productId = -1;
 
 
     /**
-     * TODO: Product ID generator (for parts too)
+     * Number generator
      */
-
-      /*
-    public int generateProductId(){
+    public static int productId = 0;
+    public static int generateProductId(){
         productId++;
         return productId;
     }
-
-     */
 }
