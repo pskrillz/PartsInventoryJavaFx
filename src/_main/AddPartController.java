@@ -14,10 +14,6 @@ import java.io.IOException;
 
 public class AddPartController {
 
-   // public int partId = -1;
-    // public RadioButton radioInHouse;
-    // public RadioButton radioOutsourced;
-
     @FXML
     private Label partTypeSpecificLabel;
     @FXML
@@ -66,7 +62,6 @@ public class AddPartController {
 @FXML
     public void savePart() throws IOException {
 
-
         String name = this.nameField.getText();
         int stock  = Integer.parseInt(this.invField.getText()) ;
         double price = Double.parseDouble(this.priceField.getText());
@@ -74,28 +69,24 @@ public class AddPartController {
         int min = Integer.parseInt(this.minField.getText());
         String uniqueField = this.uniqueField.getText();
 
-
-
         if (isOutsourced == false){
              InHouse inHousePart = new InHouse(generatePartId(), name, price, stock, min, max, Integer.parseInt(uniqueField));
 
-
             /**
              * Error: "Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException"
-             * Cause Theories (deductive): Something to do with threads, handling exceptions, OOP on the static model, or me maybe using the same field for both part types.
+             * Cause Theories (deductive): Something to do with threads, handling exceptions, OOP on the static model, or maybe using the same field for both part types.
+             * Solution: Needed to instantiate the instance within the singleton and create a way to access it from other the controller.
              */
-                 Inventory.addPart(inHousePart);
+            Inventory.getInstance().addPart(inHousePart);
 
-
-
-            System.out.println(inHousePart.getId());
-          //  System.out.println(generatePartId());
+            System.out.println(inHousePart.getId() + " " + inHousePart.getName());
+            System.out.println(Inventory.getInstance().getAllParts());
 
         } else if (isOutsourced){
             Outsourced outsourcedPart = new Outsourced(1, name, price, stock, min, max, uniqueField);
-            models.Inventory.addPart(outsourcedPart);
+            Inventory.getInstance().addPart(outsourcedPart);
 
-            System.out.println(outsourcedPart);
+            System.out.println(outsourcedPart.getName() + " " + outsourcedPart.getId());
         }
 
 
