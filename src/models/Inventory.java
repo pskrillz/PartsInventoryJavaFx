@@ -3,19 +3,36 @@ package models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Singleton class to hold all the data for parts and products.
  */
 
 
 public class Inventory {
+
+    private static String inventoryData = "inventoryData.txt";
+
+    /**
+     * The next few lines instantiates the singleton so the methods can be used in other controllers.
+     */
     private static Inventory inv = new Inventory(null, null);
+
+    /**
+     * selects the singleton object with proper encapsulation
+     * @return
+     */
 
     public static Inventory getInstance() {
         return inv;
     }
 
-    ;
+
 
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
@@ -43,6 +60,25 @@ public class Inventory {
     public void addProduct(Product newProduct) {
         allProducts.add(newProduct);
     }
+
+    /**
+     *
+     * @throws IOException
+     */
+
+    public void loadData() throws IOException{
+        Path filePath = Paths.get(inventoryData);
+        BufferedReader br = Files.newBufferedReader(filePath);
+
+        String input;
+    }
+
+
+
+
+
+
+
 
     /**
      * look up part else return null
