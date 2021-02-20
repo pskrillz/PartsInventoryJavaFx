@@ -12,7 +12,6 @@ import models.Part;
 
 public class Main extends Application {
 
-    Inventory inv = new Inventory(null, null);
 
 
 
@@ -35,9 +34,6 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
-        Inventory inv = new Inventory(null, null);
-      //  inv.addPart(new InHouse());
 
 
     }

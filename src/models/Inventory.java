@@ -3,12 +3,18 @@ package models;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Singleton class to hold all the data for parts and products.
+ */
+
+
 public class Inventory {
+    private static Inventory inv = new Inventory(null, null);
 
     private static ObservableList<Part> allParts = FXCollections.observableArrayList();
     private static ObservableList<Product> allProducts = FXCollections.observableArrayList();
 
-    public Inventory(ObservableList<Part> allParts, ObservableList<Product> allProducts) {
+    private Inventory(ObservableList<Part> allParts, ObservableList<Product> allProducts) {
         this.allParts = allParts;
         this.allProducts = allProducts;
     }
