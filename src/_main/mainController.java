@@ -11,6 +11,7 @@ import java.io.IOException;
 import javafx.scene.control.Button;
 import models.Inventory;
 
+
 import static models.Inventory.getAllParts;
 
 
@@ -56,6 +57,9 @@ public class mainController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+
+        // TODO (optional): Persistent data storage and retrieval not part of requirements.
+        // Inventory.getInstance().loadData();
     }
 
     /**Error:

@@ -5,9 +5,11 @@ import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 
 /**
  * Singleton class to hold all the data for parts and products.
@@ -16,7 +18,7 @@ import java.nio.file.Paths;
 
 public class Inventory {
 
-    private static String inventoryData = "inventoryData.txt";
+   private static String inventoryData = "inventoryData.txt";
 
     /**
      * The next few lines instantiates the singleton so the methods can be used in other controllers.
@@ -62,7 +64,8 @@ public class Inventory {
     }
 
     /**
-     *
+     * Sample flat file and parser for persistent data storage.
+     * Errors: NoSuchFileException and RuntimeException
      * @throws IOException
      */
 
@@ -71,6 +74,38 @@ public class Inventory {
         BufferedReader br = Files.newBufferedReader(filePath);
 
         String input;
+
+        try {
+            while((input = br.readLine()) !=null){
+                String[] data = input.split(",");
+
+                int id = Integer.parseInt(data[0]);
+                String name = data[1];
+                double price = Double.parseDouble(data[2]) ;
+                int stock = Integer.parseInt(data[3]);
+                int min = Integer.parseInt(data[4]) ;
+                int max = Integer.parseInt(data[5]) ;
+                int uniqueField = Integer.parseInt(data[6]);
+
+                // lets just do it for InHouse for  now
+
+                Part part = new InHouse(id, name, price, stock, min, max, uniqueField);
+                Inventory.getInstance().addPart(part);
+
+                System.out.println(part.getName());
+
+
+            }
+
+        } finally {
+            if(br != null){
+                br.close();
+            }
+
+        }
+
+
+
     }
 
 
