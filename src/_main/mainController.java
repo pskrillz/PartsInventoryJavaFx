@@ -82,33 +82,52 @@ public class mainController {
      * Resolution: fxml view needed a controller to be correctly connected.
      */
     public void openModifyPart() throws Exception {
-        if (itemSelected )
-        {
+//        if (itemSelected )
+//        {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        }
-        else
-        {
-            /**
-             * OK to have alert here, but better UX if button is disabled until they select
-             */
-            Alert a = new Alert(AlertType.WARNING, "Please select part first to modify");
-
-            a.show();
-        }
+//        }
+//        else
+//        {
+//            /**
+//             * OK to have alert here, but better UX if button is disabled until they select
+//             */
+//            Alert a = new Alert(AlertType.WARNING, "Please select part first to modify");
+//
+//            a.show();
+//        }
     }
 
 
-/*
-    public void setPartsTable(){
-        partsTable.setItems(getAllParts());
+    public void openAddProduct() throws Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+        // TODO: set this up
+       // stage.setOnHiding(event -> setProductsTable());
     }
 
 
- */
+    /*
+    Error: RuntimeException java.lang.reflect.InvocationTargetException
+    Cause Theory: Unknown... literally just doing the same thing all 3 other similar functions are doing
+    Solution: ModifyProductController was not hooked up to the right .fxml file
+     */
+    public void openModifyProduct() throws  Exception{
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
+        Parent root = (Parent) fxmlLoader.load();
+        Stage stage = new Stage();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+
 
 
 

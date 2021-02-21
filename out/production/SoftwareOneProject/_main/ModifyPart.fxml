@@ -20,7 +20,7 @@
         <TextField fx:id="maxField" layoutX="164.0" layoutY="286.0" />
         <TextField fx:id="uniqueField" layoutX="164.0" layoutY="322.0" />
         <TextField fx:id="minField" layoutX="393.0" layoutY="286.0" />
-        <Button  layoutX="332.0" layoutY="383.0" mnemonicParsing="false" text="Save" />
+        <Button onAction="#modifyPart" layoutX="332.0" layoutY="383.0" mnemonicParsing="false" text="Save" />
         <Button layoutX="393.0" layoutY="383.0" mnemonicParsing="false" text="Cancel" />
         <Label layoutX="73.0" layoutY="137.0" text="ID" />
         <Label layoutX="71.0" layoutY="176.0" text="Name" />
