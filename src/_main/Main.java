@@ -14,6 +14,9 @@ import java.io.IOException;
 
 public class Main extends Application {
 
+    public static Inventory inv = Inventory.getInstance();
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
 

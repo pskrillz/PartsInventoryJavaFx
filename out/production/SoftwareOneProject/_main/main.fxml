@@ -49,8 +49,8 @@
             <ButtonBar layoutX="166.0" layoutY="213.0" prefHeight="40.0" prefWidth="241.0">
               <buttons>
                   <Button mnemonicParsing="false" onAction="#openAddPart" text="Add" />
-                <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#openModifyPart" text="Modify" />
-                  <Button fx:id="deleteButton" mnemonicParsing="false" text="Delete" />
+                <Button fx:id="modifyPartButton" mnemonicParsing="false" onAction="#openModifyPart" text="Modify" />
+                  <Button fx:id="deletePartButton" onAction="#deletePart" mnemonicParsing="false" text="Delete" />
               </buttons>
             </ButtonBar>
          </children>
@@ -78,7 +78,7 @@
               <buttons>
                   <Button mnemonicParsing="false" onAction="#openAddProduct" text="Add" />
                   <Button mnemonicParsing="false" onAction="#openModifyProduct" text="Modify" />
-                <Button fx:id="deletePartButton" mnemonicParsing="false" text="Delete" />
+                <Button fx:id="deleteProductButton" mnemonicParsing="false" text="Delete" />
               </buttons>
             </ButtonBar>
          </children>

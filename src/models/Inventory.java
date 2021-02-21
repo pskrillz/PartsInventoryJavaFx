@@ -195,15 +195,13 @@ public class Inventory {
      */
 
 
-// TODO: Check if working
-    public boolean deletePart(Part part) {
+
+    public void deletePart(Part part) {
         allParts.remove(part);
-        return true;
     }
 
-    public boolean deleteProduct(Product product) {
+    public void deleteProduct(Product product) {
         allProducts.remove(product);
-        return true;
     }
 
     /**

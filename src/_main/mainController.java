@@ -4,16 +4,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
-import javafx.scene.control.Button;
-import javafx.scene.control.Alert.AlertType;
 import models.Inventory;
 import models.Part;
 
@@ -37,14 +33,14 @@ public class mainController {
     @FXML
     private TableColumn<Part, Double> partPriceColumn;
     @FXML
-    private Button modifyButton;
+    private Button modifyPartButton;
     @FXML
-    private Button deleteButton;
+    private Button deletePartButton;
     @FXML
     public void initialize(){
      //   modifyButton.setDisable(true);
-        deleteButton.setDisable(true);
-        modifyButton.setDisable(true);
+        deletePartButton.setDisable(true);
+        modifyPartButton.setDisable(true);
         setPartsTable();
 
         /** this sets an event listener to the table to detect if an item is selected
@@ -54,10 +50,22 @@ public class mainController {
             if(event.getButton().equals(MouseButton.PRIMARY)){
                 System.out.println(partsTable.getSelectionModel().getSelectedItem());
                 // modify and delete buttons are only enabled if an item is selected
-                deleteButton.setDisable(false);
-                modifyButton.setDisable(false);
+                deletePartButton.setDisable(false);
+                modifyPartButton.setDisable(false);
             }
         });
+
+
+    }
+
+
+    public void deletePart(){
+        Part selectedPartIndex = partsTable.getSelectionModel().getSelectedItem();
+        System.out.println(selectedPartIndex);
+        if (confirmationMessage("Are you sure you want to delete this part?")) {
+            Main.inv.deletePart(selectedPartIndex);
+        }
+        setPartsTable();
     }
 
 
@@ -81,7 +89,7 @@ public class mainController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-        stage.setOnHiding(event -> setPartsTable()); // update the table
+        stage.setOnHiding(event -> setPartsTable()); // refreshes table
 
         // TODO (optional): Persistent data storage and retrieval not part of requirements.
         // Inventory.getInstance().loadData();
@@ -101,16 +109,12 @@ public class mainController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-//        }
-//        else
-//        {
-//            /**
-//             * OK to have alert here, but better UX if button is disabled until they select
-//             */
-//            Alert a = new Alert(AlertType.WARNING, "Please select part first to modify");
-//
-//            a.show();
-//        }
+//        }else{
+    //        Alert a = new Alert(AlertType.WARNING, "Please select part first to modify");
+//            a.show();}
+        //            /**
+        //             * OK to have alert here, but better UX if button is disabled until an item is selected
+
     }
 
 
@@ -149,14 +153,6 @@ public class mainController {
         stage.close();
     }
 
-    public void deletePartButton(){
-        deleteButton.setDisable(false);
-
-    }
-
-    public void partIsSelected(){
-        int selectedPart = partsTable.getSelectionModel().getSelectedIndex();
-    }
 
 
     public void setPartsTable(){
@@ -168,4 +164,9 @@ public class mainController {
     }
 
 
+    private boolean confirmationMessage(String notificationText){
+        Alert error = new Alert(Alert.AlertType.CONFIRMATION, notificationText, ButtonType.YES, ButtonType.NO);
+        error.showAndWait();
+        return error.getResult() == ButtonType.YES;
+    }
 }
