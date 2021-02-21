@@ -44,12 +44,22 @@ public class mainController {
     public void initialize(){
      //   modifyButton.setDisable(true);
         deleteButton.setDisable(true);
+        modifyButton.setDisable(true);
         setPartsTable();
+
+        /** this sets an event listener to the table to detect if an item is selected
+         *
+         */
+        partsTable.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                System.out.println(partsTable.getSelectionModel().getSelectedItem());
+                // modify and delete buttons are only enabled if an item is selected
+                deleteButton.setDisable(false);
+                modifyButton.setDisable(false);
+            }
+        });
     }
 
-
-
-    // public boolean itemSelected = false;
 
 
 

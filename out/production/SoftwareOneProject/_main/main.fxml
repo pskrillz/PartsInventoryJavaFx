@@ -78,7 +78,7 @@
               <buttons>
                   <Button mnemonicParsing="false" onAction="#openAddProduct" text="Add" />
                   <Button mnemonicParsing="false" onAction="#openModifyProduct" text="Modify" />
-                <Button mnemonicParsing="false" text="Delete" />
+                <Button fx:id="deletePartButton" mnemonicParsing="false" text="Delete" />
               </buttons>
             </ButtonBar>
          </children>
