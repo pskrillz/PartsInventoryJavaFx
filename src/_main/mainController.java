@@ -40,7 +40,7 @@ public class mainController {
     private Button deleteButton;
     @FXML
     public void initialize(){
-        modifyButton.setDisable(true);
+     //   modifyButton.setDisable(true);
         deleteButton.setDisable(true);
         setPartsTable();
     }
@@ -82,7 +82,8 @@ public class mainController {
      * Resolution: fxml view needed a controller to be correctly connected.
      */
     public void openModifyPart() throws Exception {
-        if (itemSelected ) {
+        if (itemSelected )
+        {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();

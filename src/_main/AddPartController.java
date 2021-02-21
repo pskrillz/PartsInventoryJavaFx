@@ -56,7 +56,8 @@ public class AddPartController {
 
 
     /**
-     * This method saves all the input fields, and casts the data types to the right types for
+     * This method saves all the input fields, and
+     * casts the data types to the right types for
      * each associated part's class constructors.
      */
 @FXML
