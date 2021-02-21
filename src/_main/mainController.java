@@ -7,14 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import models.Inventory;
-
-
-import static models.Inventory.getAllParts;
+import models.Part;
 
 
 /**
@@ -26,15 +25,25 @@ public class mainController {
     @FXML
     private Button exitButton;
     @FXML
-    private TableView partsTable;
+    private TableView<Part> partsTable;
     @FXML
-    private TableColumn partIdColumn;
+    private TableColumn<Part, Integer> partIdColumn;
     @FXML
-    private TableColumn partNameColumn;
+    private TableColumn<Part, String> partNameColumn;
     @FXML
-    private TableColumn partStockColumn;
+    private TableColumn<Part, Integer> partStockColumn;
     @FXML
-    private TableColumn partPriceColumn;
+    private TableColumn<Part, Double> partPriceColumn;
+    @FXML
+    private Button modifyButton;
+    @FXML
+    private Button deleteButton;
+    @FXML
+    public void initialize(){
+        modifyButton.setDisable(true);
+        deleteButton.setDisable(true);
+        setPartsTable();
+    }
 
 
 
@@ -60,6 +69,7 @@ public class mainController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding(event -> setPartsTable()); // update the table
 
         // TODO (optional): Persistent data storage and retrieval not part of requirements.
         // Inventory.getInstance().loadData();
@@ -106,5 +116,17 @@ public class mainController {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
+
+
+
+
+    public void setPartsTable(){
+        partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        partStockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        partPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        partsTable.getItems().setAll(Inventory.getInstance().getAllParts());
+    }
+
 
 }

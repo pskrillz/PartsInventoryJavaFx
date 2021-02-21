@@ -17,6 +17,10 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+       // Inventory.getInstance().addPart(new Outsourced(0, "Name", 1.00, 1,1,2, "Company X"));
+
+
+
         Parent main = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Inventory Management V1");
         primaryStage.setScene(new Scene(main, 1010, 375));
