@@ -11,8 +11,11 @@
                 <Font name="System Bold" size="12.0" />
             </font>
         </Label>
-        <RadioButton layoutX="164.0" layoutY="51.0" mnemonicParsing="false" text="In-House" />
-        <RadioButton layoutX="300.0" layoutY="51.0" mnemonicParsing="false" text="Outsourced" />
+        <fx:define>
+            <ToggleGroup fx:id="partType" />
+        </fx:define>
+        <RadioButton onAction="#toggleIsNotOutsourced" toggleGroup="$partType" selected="true" layoutX="164.0" layoutY="51.0" mnemonicParsing="false" text="In-House" />
+        <RadioButton onAction="#toggleIsOutsourced" toggleGroup="$partType" layoutX="300.0" layoutY="51.0" mnemonicParsing="false" text="Outsourced" />
         <TextField disable="true" layoutX="164.0" layoutY="133.0" promptText="Auto Generated" />
         <TextField fx:id="nameField" layoutX="164.0" layoutY="172.0" />
         <TextField fx:id="invField" layoutX="164.0" layoutY="208.0" />
@@ -27,7 +30,7 @@
         <Label layoutX="71.0" layoutY="212.0" text="Inv" />
         <Label layoutX="71.0" layoutY="252.0" text="Price/Cost" />
         <Label layoutX="71.0" layoutY="290.0" text="Max" />
-        <Label layoutX="71.0" layoutY="326.0" text="Machine ID" />
+        <Label fx:id="partTypeSpecificLabel" layoutX="71.0" layoutY="326.0" text="Machine ID" />
         <Label layoutX="342.0" layoutY="290.0" text="Min" />
     </children>
 </AnchorPane>

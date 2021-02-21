@@ -8,6 +8,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import javafx.scene.control.Button;
@@ -47,7 +49,7 @@ public class mainController {
 
 
 
-    public boolean itemSelected = false;
+    // public boolean itemSelected = false;
 
 
 
@@ -137,7 +139,14 @@ public class mainController {
         stage.close();
     }
 
+    public void deletePartButton(){
+        deleteButton.setDisable(false);
 
+    }
+
+    public void partIsSelected(){
+        int selectedPart = partsTable.getSelectionModel().getSelectedIndex();
+    }
 
 
     public void setPartsTable(){

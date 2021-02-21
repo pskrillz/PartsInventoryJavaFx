@@ -17,7 +17,13 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-       // Inventory.getInstance().addPart(new Outsourced(0, "Name", 1.00, 1,1,2, "Company X"));
+        // sample data
+       Inventory.getInstance().addPart(new Outsourced(4532, "Battery",
+               3.00, 6,5,20, "Toyota"));
+        Inventory.getInstance().addPart(new Outsourced(6832, "Starter",
+                25.00, 3,1,20, "Mitsubishi"));
+        Inventory.getInstance().addPart(new Outsourced(4532, "Transmission",
+                1000.00, 2,1,20, "Toyota"));
 
 
 
