@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import models.Inventory;
 import models.Part;
+import models.Product;
 
 
 /**
@@ -42,12 +43,30 @@ public class mainController {
     @FXML
     private Button deletePartButton;
     @FXML
+    private TableView<Product> productsTable;
+    @FXML
+    private TableColumn<Product, Integer> productIdColumn;
+    @FXML
+    private TableColumn<Product, String> productNameColumn;
+    @FXML
+    private TableColumn<Product, Integer> productStockColumn;
+    @FXML
+    private TableColumn<Product, Double> productPriceColumn;
+    @FXML
+    private Button modifyProductBtn;
+    @FXML
+    private Button deleteProductBtn;
+    @FXML
+    private Button addProductBtn;
+    @FXML
     public void initialize(){
-     //   modifyButton.setDisable(true);
+
         deletePartButton.setDisable(true);
         modifyPartButton.setDisable(true);
+        deleteProductBtn.setDisable(true);
+        modifyProductBtn.setDisable(true);
         setPartsTable();
-    //    setProductsTable();
+        setProductsTable();
 
         /** this sets an event listener to the table to detect if an item is selected
          *
@@ -58,6 +77,13 @@ public class mainController {
                 // modify and delete buttons are only enabled if an item is selected
                 deletePartButton.setDisable(false);
                 modifyPartButton.setDisable(false);
+            }
+        });
+        productsTable.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                System.out.println(productsTable.getSelectionModel().getSelectedItem());
+                deleteProductBtn.setDisable(false);
+                modifyProductBtn.setDisable(false);
             }
         });
 
@@ -167,13 +193,13 @@ public class mainController {
         partsTable.getItems().setAll(Inventory.getInstance().getAllParts());
     }
 
-//    public void setProductsTable(){
-//        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-//        productStockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
-//        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-//        productTable.getItems().setAll(Inventory.getInstance().getAllParts());
-//    }
+    public void setProductsTable(){
+        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productStockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productsTable.getItems().setAll(Inventory.getInstance().getAllProducts());
+    }
 
 
     private boolean confirmationMessage(String notificationText){
