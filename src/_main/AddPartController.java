@@ -78,8 +78,19 @@ public class AddPartController {
             errorExitSave = true;
         }
 
+        if (!(stock >= min) || !(stock <= max)){
+            generateError("Inventory Error: \n" +
+                    "Current stock must be greater than minimum supply \n" +
+                    "and less than maximum supply");
+            return;
+        }
 
-      //  uniqueField = this.uniqueField.getText();
+        if(min > max || max < min){
+            generateError("Inventory Error: \n" +
+                    "Minimum must be less than maximum and " +
+                    "maximum must be greater than minimum");
+            return;
+        }
 
 
         if (isOutsourced == false && !errorExitSave){
@@ -92,6 +103,7 @@ public class AddPartController {
                 return; // another way of exiting process on error
             }
 
+
              InHouse inHousePart = new InHouse(generatePartId(), name, price, stock, min, max, machineId);
 
             /**
@@ -100,9 +112,6 @@ public class AddPartController {
              * Solution: Needed to instantiate the instance within the singleton and create a way to access it from other the controller.
              */
             Inventory.getInstance().addPart(inHousePart);
-
-            System.out.println(inHousePart.getId() + " " + inHousePart.getName());
-            System.out.println(Inventory.getInstance().getAllParts());
 
             this.closeWindow();
 
