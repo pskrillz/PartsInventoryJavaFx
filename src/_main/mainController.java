@@ -125,6 +125,8 @@ public class mainController {
      */
     public void openAddPart() throws IOException {
 
+
+
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddPart.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -145,11 +147,14 @@ public class mainController {
     public void openModifyPart() throws Exception {
 //        if (itemSelected )
 //        {
+        ModifyPartController.selectedPart = partsTable.getSelectionModel().getSelectedIndex();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyPart.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+
+
 //        }else{
     //        Alert a = new Alert(AlertType.WARNING, "Please select part first to modify");
 //            a.show();}

@@ -48,7 +48,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="partSearchField" onKeyReleased="#onPartSearch" layoutX="248.0" layoutY="11.0" prefHeight="25.0" prefWidth="160.0" promptText="Search by Name or ID#" />
+            <TextField fx:id="partSearchField" onKeyReleased="#onPartSearch" layoutX="248.0" layoutY="11.0" prefHeight="25.0" prefWidth="160.0" promptText="Search by Name or ID #" />
             <ButtonBar layoutX="166.0" layoutY="213.0" prefHeight="40.0" prefWidth="241.0">
               <buttons>
                   <Button mnemonicParsing="false" onAction="#openAddPart" text="Add" />
@@ -79,7 +79,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField onKeyReleased="#onProductSearch" fx:id="productSearchField" layoutX="270.0" layoutY="11.0" prefHeight="25.0" prefWidth="176.0" promptText="Search by Name or ID#" />
+            <TextField onKeyReleased="#onProductSearch" fx:id="productSearchField" layoutX="270.0" layoutY="11.0" prefHeight="25.0" prefWidth="176.0" promptText="Search by Name or ID #" />
             <ButtonBar layoutX="186.0" layoutY="212.0" prefHeight="40.0" prefWidth="248.0">
               <buttons>
                   <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#openAddProduct" text="Add" />
