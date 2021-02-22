@@ -1,5 +1,8 @@
 package _main;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -35,6 +38,8 @@ public class mainController {
     @FXML
     private Button modifyPartButton;
     @FXML
+    private TextField partSearchField;
+    @FXML
     private Button deletePartButton;
     @FXML
     public void initialize(){
@@ -42,6 +47,7 @@ public class mainController {
         deletePartButton.setDisable(true);
         modifyPartButton.setDisable(true);
         setPartsTable();
+        setProductsTable();
 
         /** this sets an event listener to the table to detect if an item is selected
          *
@@ -146,8 +152,6 @@ public class mainController {
 
 
 
-
-
     public void closeWindow(){
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
@@ -163,10 +167,61 @@ public class mainController {
         partsTable.getItems().setAll(Inventory.getInstance().getAllParts());
     }
 
+    public void setProductsTable(){
+        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        productStockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productTable.getItems().setAll(Inventory.getInstance().getAllParts());
+    }
+
 
     private boolean confirmationMessage(String notificationText){
         Alert error = new Alert(Alert.AlertType.CONFIRMATION, notificationText, ButtonType.YES, ButtonType.NO);
         error.showAndWait();
         return error.getResult() == ButtonType.YES;
     }
+
+
+
+    // TODO Fix Bugs
+    /*
+    Bug: class com.sun.javafx.collections.ObservableListWrapper cannot be cast to class models.Part
+    (com.sun.javafx.collections.ObservableListWrappers in module javafx.base of loader 'app';
+    models.Part is in module SoftwareOneProject of loader 'app')
+     */
+
+    public void onPartSearch() {
+
+        ObservableList<Part> results = FXCollections.observableArrayList();
+        String searchValue = partSearchField.getText();
+
+        if (searchValue.length() != 0) {
+
+            results.add((Part) Main.inv.getInstance().lookupPart(searchValue));
+
+            try {
+                int intSearchValue = Integer.parseInt(searchValue);
+                //   results.add((Part) Main.inv.getInstance().lookupPart(intSearchValue));
+                results = Main.inv.getInstance().lookupPart(intSearchValue);
+
+            } catch (NumberFormatException notInt) {
+                results.add((Part) Main.inv.getInstance().lookupPart(searchValue));
+            }
+
+            if (results.size() > 0) {
+                partsTable.getItems().setAll(results);
+            } else {
+                partsTable.getItems().clear();
+            }
+        } else {
+            setPartsTable();
+        }
+
+    }
+
+
+
+
+
 }

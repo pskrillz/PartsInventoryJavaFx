@@ -5,10 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import models.InHouse;
-import models.Inventory;
-import models.Outsourced;
-import models.Part;
+import models.*;
 
 import java.io.IOException;
 
@@ -28,6 +25,7 @@ public class Main extends Application {
         Inventory.getInstance().addPart(new Outsourced(4532, "Transmission",
                 1000.00, 2,1,20, "Toyota"));
 
+        Inventory.getInstance().addProduct(new Product(null, 33, "hello", 3, 3, 3, 3 ));
 
 
         Parent main = FXMLLoader.load(getClass().getResource("main.fxml"));

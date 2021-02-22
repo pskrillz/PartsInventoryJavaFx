@@ -5,11 +5,9 @@ import javafx.collections.ObservableList;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
 
 /**
  * Singleton class to hold all the data for parts and products.
@@ -111,41 +109,6 @@ public class Inventory {
 
 
 
-
-
-
-
-    /**
-     * look up part else return null
-     *
-     * @param partId
-     * @return
-     */
-    public Part lookupPart(int partId) {
-        for (Part part : allParts) {
-            if (part.getId() == partId)
-                return part;
-        }
-        return null;
-    }
-
-    ;
-
-    /**
-     * look up product else return null
-     *
-     * @param productId
-     * @return
-     */
-
-    public Product lookupProduct(int productId) {
-        for (Product product : allProducts) {
-            if (product.getId() == productId)
-                return product;
-        }
-        return null;
-    }
-
     /**
      * Look up by string name and return list
      *
@@ -156,21 +119,39 @@ public class Inventory {
     public ObservableList<Part> lookupPart(String partName) {
         ObservableList<Part> results = FXCollections.observableArrayList();
         for (Part part : allParts) {
-            if (part.getName().equals(partName)) {
+            if (part.getName().contains(partName)) {
                 results.add(part);
             }
         }
         return results;
     }
 
+
+    public ObservableList<Part> lookupPart(int partId) {
+        ObservableList<Part> results = FXCollections.observableArrayList();
+        for (Part part : allParts) {
+            if (part.getId() == partId) {
+                results.add(part);
+            }
+        }
+        return results;
+    }
+
+
+
     public ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> results = FXCollections.observableArrayList();
         for (Product product : allProducts) {
-            if (product.getName().equals(productName))
+            if (product.getName().contains(productName))
                 results.add(product);
         }
         return results;
     }
+
+
+
+
+
 
     /**
      * Update parts and products (modify)
