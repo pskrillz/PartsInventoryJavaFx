@@ -1,10 +1,7 @@
 package _main;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.InHouse;
 import models.Outsourced;
@@ -62,16 +59,40 @@ public class AddPartController {
      */
 @FXML
     public void savePart() throws IOException {
+    // initializing variables in function scope before error handlers.
+        String name; int stock = 0; double price = 0; int max = 0; int min = 0; String uniqueField = ""; int machineId = 0;
+        // condition that prevents saving an incorrect entry on error
+        boolean errorExitSave = false;
 
-        String name = this.nameField.getText();
-        int stock  = Integer.parseInt(this.invField.getText()) ;
-        double price = Double.parseDouble(this.priceField.getText());
-        int max = Integer.parseInt(this.maxField.getText());
-        int min = Integer.parseInt(this.minField.getText());
-        String uniqueField = this.uniqueField.getText();
+        name = this.nameField.getText();
 
-        if (isOutsourced == false){
-             InHouse inHousePart = new InHouse(generatePartId(), name, price, stock, min, max, Integer.parseInt(uniqueField));
+    // validation to make sure that number fields don't receive string input
+        try {
+            stock  = Integer.parseInt(this.invField.getText());
+            price = Double.parseDouble(this.priceField.getText());
+            max = Integer.parseInt(this.maxField.getText());
+            min = Integer.parseInt(this.minField.getText());
+        } catch (NumberFormatException err){
+            generateError("You entered letters in a number field\n" +
+                    "Please correct your input before continuing");
+            errorExitSave = true;
+        }
+
+
+      //  uniqueField = this.uniqueField.getText();
+
+
+        if (isOutsourced == false && !errorExitSave){
+
+            try {
+                machineId = Integer.parseInt(this.uniqueField.getText());
+            } catch (NumberFormatException err){
+                generateError("You entered letters in a number field \n" +
+                        "Please correct your input before continuing");
+                return; // another way of exiting process on error
+            }
+
+             InHouse inHousePart = new InHouse(generatePartId(), name, price, stock, min, max, machineId);
 
             /**
              * Error: "Exception in thread "JavaFX Application Thread" java.lang.RuntimeException: java.lang.reflect.InvocationTargetException"
@@ -83,16 +104,20 @@ public class AddPartController {
             System.out.println(inHousePart.getId() + " " + inHousePart.getName());
             System.out.println(Inventory.getInstance().getAllParts());
 
-        } else if (isOutsourced){
+            this.closeWindow();
+
+        } else if (isOutsourced && !errorExitSave){
+            uniqueField = this.uniqueField.getText();
             Outsourced outsourcedPart = new Outsourced(1, name, price, stock, min, max, uniqueField);
             Inventory.getInstance().addPart(outsourcedPart);
 
             System.out.println(outsourcedPart.getName() + " " + outsourcedPart.getId());
+
+            this.closeWindow();
         }
 
 
 
-        this.closeWindow();
     }
 
     /**
@@ -113,6 +138,11 @@ public class AddPartController {
     public void closeWindow(){
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void generateError(String errorText){
+        Alert inputValError = new Alert(Alert.AlertType.WARNING, errorText, ButtonType.OK);
+        inputValError.show();
     }
 
 
