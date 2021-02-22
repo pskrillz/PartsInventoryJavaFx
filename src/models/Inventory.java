@@ -126,7 +126,7 @@ public class Inventory {
         return results;
     }
 
-
+    // Overloaded lookupPart to handle searching by ID number
     public ObservableList<Part> lookupPart(int partId) {
         ObservableList<Part> results = FXCollections.observableArrayList();
         for (Part part : allParts) {
@@ -148,6 +148,15 @@ public class Inventory {
         return results;
     }
 
+    // Overloaded lookupProduct to handle searching by ID number
+    public ObservableList<Product> lookupProduct(int productId) {
+        ObservableList<Product> results = FXCollections.observableArrayList();
+        for (Product product : allProducts) {
+            if (product.getId() == productId)
+                results.add(product);
+        }
+        return results;
+    }
 
 
 

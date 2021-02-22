@@ -33,6 +33,9 @@
          </GridPane.margin>
          <children>
             <TableView fx:id="partsTable" layoutX="10.0" layoutY="40.0" prefHeight="164.0" prefWidth="425.0">
+                <placeholder>
+                    <Label text="No results found!"/>
+                </placeholder>
               <columns>
                 <TableColumn fx:id="partIdColumn" prefWidth="75.0" text="Part ID" />
                 <TableColumn fx:id="partNameColumn" text="Part Name" />
@@ -45,7 +48,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField fx:id="partSearchField" onKeyReleased="#onPartSearch" layoutX="248.0" layoutY="11.0" prefHeight="25.0" prefWidth="160.0" promptText="Search by Part ID or Other Attribute" />
+            <TextField fx:id="partSearchField" onKeyReleased="#onPartSearch" layoutX="248.0" layoutY="11.0" prefHeight="25.0" prefWidth="160.0" promptText="Search by Name or ID#" />
             <ButtonBar layoutX="166.0" layoutY="213.0" prefHeight="40.0" prefWidth="241.0">
               <buttons>
                   <Button mnemonicParsing="false" onAction="#openAddPart" text="Add" />
@@ -61,6 +64,9 @@
          </GridPane.margin>
          <children>
             <TableView fx:id="productsTable" layoutX="13.0" layoutY="39.0" prefHeight="164.0" prefWidth="440.0">
+                <placeholder>
+                    <Label text="No results found!"/>
+                </placeholder>
               <columns>
                 <TableColumn fx:id="productIdColumn" prefWidth="75.0" text="Product ID" />
                 <TableColumn fx:id="productNameColumn" prefWidth="115.0" text="Product Name" />
@@ -73,12 +79,12 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
-            <TextField layoutX="270.0" layoutY="11.0" prefHeight="25.0" prefWidth="176.0" promptText="Search by Product ID or Other Attribute" />
+            <TextField onKeyReleased="#onProductSearch" fx:id="productSearchField" layoutX="270.0" layoutY="11.0" prefHeight="25.0" prefWidth="176.0" promptText="Search by Name or ID#" />
             <ButtonBar layoutX="186.0" layoutY="212.0" prefHeight="40.0" prefWidth="248.0">
               <buttons>
-                  <Button fx:id="addProductBtn" mnemonicParsing="false" onAction="#openAddProduct" text="Add" />
-                  <Button fx:id="modifyProductBtn" mnemonicParsing="false" onAction="#openModifyProduct" text="Modify" />
-                <Button fx:id="deleteProductButton" mnemonicParsing="false" text="Delete" />
+                  <Button fx:id="addProductButton" mnemonicParsing="false" onAction="#openAddProduct" text="Add" />
+                  <Button fx:id="modifyProductButton" mnemonicParsing="false" onAction="#openModifyProduct" text="Modify" />
+                <Button onAction="#deleteProduct" fx:id="deleteProductButton" mnemonicParsing="false" text="Delete" />
               </buttons>
             </ButtonBar>
          </children>

@@ -53,18 +53,20 @@ public class mainController {
     @FXML
     private TableColumn<Product, Double> productPriceColumn;
     @FXML
-    private Button modifyProductBtn;
+    private Button modifyProductButton;
     @FXML
-    private Button deleteProductBtn;
+    private Button deleteProductButton;
     @FXML
-    private Button addProductBtn;
+    private Button addProductButton;
+    @FXML
+    private TextField productSearchField;
     @FXML
     public void initialize(){
 
         deletePartButton.setDisable(true);
         modifyPartButton.setDisable(true);
-        deleteProductBtn.setDisable(true);
-        modifyProductBtn.setDisable(true);
+        deleteProductButton.setDisable(true);
+        modifyProductButton.setDisable(true);
         setPartsTable();
         setProductsTable();
 
@@ -82,8 +84,8 @@ public class mainController {
         productsTable.setOnMouseClicked((MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
                 System.out.println(productsTable.getSelectionModel().getSelectedItem());
-                deleteProductBtn.setDisable(false);
-                modifyProductBtn.setDisable(false);
+                deleteProductButton.setDisable(false);
+                modifyProductButton.setDisable(false);
             }
         });
 
@@ -92,14 +94,21 @@ public class mainController {
 
 
     public void deletePart(){
-        Part selectedPartIndex = partsTable.getSelectionModel().getSelectedItem();
-        System.out.println(selectedPartIndex);
+        Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+        System.out.println(selectedPart);
         if (confirmationMessage("Are you sure you want to delete this part?")) {
-            Main.inv.deletePart(selectedPartIndex);
+            Main.inv.deletePart(selectedPart);
         }
         setPartsTable();
     }
 
+    public void deleteProduct(){
+        Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (confirmationMessage("Are you sure you want to delete this product?")) {
+            Main.inv.deleteProduct(selectedProduct);
+        }
+        setProductsTable();
+    }
 
 
 
@@ -156,9 +165,7 @@ public class mainController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
-
-        // TODO: set this up
-       // stage.setOnHiding(event -> setProductsTable());
+        stage.setOnHiding(event -> setProductsTable());
     }
 
 
@@ -209,7 +216,10 @@ public class mainController {
     }
 
 
-
+    private void notFoundAlert(String text){
+        Alert warning = new Alert(Alert.AlertType.WARNING, text, ButtonType.OK);
+        warning.show();
+    }
 
     /**
     Bug: class com.sun.javafx.collections.ObservableListWrapper cannot be cast to class models.Part
@@ -238,9 +248,38 @@ public class mainController {
                 partsTable.getItems().setAll(results);
             } else {
                 partsTable.getItems().clear();
+
             }
         } else {
             setPartsTable();
+        }
+
+    }
+
+
+    public void onProductSearch() {
+
+        ObservableList<Product> results = FXCollections.observableArrayList();
+        String searchValue = productSearchField.getText();
+
+        if (searchValue.length() != 0) {
+
+            try {
+                int intSearchValue = Integer.parseInt(searchValue);
+                results = Main.inv.getInstance().lookupProduct(intSearchValue);
+
+            } catch (NumberFormatException notInt) {
+                results = Main.inv.getInstance().lookupProduct(searchValue);
+            }
+
+            if (results.size() > 0) {
+                productsTable.getItems().setAll(results);
+            } else {
+                productsTable.getItems().clear();
+
+            }
+        } else {
+            setProductsTable();
         }
 
     }

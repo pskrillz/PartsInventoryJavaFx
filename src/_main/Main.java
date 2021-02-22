@@ -16,17 +16,18 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+    Inventory inv = Inventory.getInstance();
         // sample data
-       Inventory.getInstance().addPart(new Outsourced(4532, "Battery",
+       inv.addPart(new Outsourced(4532, "Battery",
                3.00, 6,5,20, "Toyota"));
-        Inventory.getInstance().addPart(new Outsourced(6832, "Starter",
+       inv.addPart(new Outsourced(6832, "Starter",
                 25.00, 3,1,20, "Mitsubishi"));
-        Inventory.getInstance().addPart(new Outsourced(4532, "Transmission",
+       inv.addPart(new Outsourced(4532, "Transmission",
                 1000.00, 2,1,20, "Toyota"));
 
-        Inventory.getInstance().addProduct(new Product(null, 33, "hello", 3, 3, 3, 3 ));
-
+       inv.addProduct(new Product(null, 33, "Camry", 21000.00, 2, 1, 3 ));
+       inv.addProduct(new Product(null, 47, "Prius", 23000.00, 2, 1, 3 ));
+       inv.addProduct(new Product(null, 47, "Tesla", 50000.00, 2, 1, 3 ));
 
         Parent main = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Inventory Management V1");
