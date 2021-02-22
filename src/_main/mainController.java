@@ -47,7 +47,7 @@ public class mainController {
         deletePartButton.setDisable(true);
         modifyPartButton.setDisable(true);
         setPartsTable();
-        setProductsTable();
+    //    setProductsTable();
 
         /** this sets an event listener to the table to detect if an item is selected
          *
@@ -167,13 +167,13 @@ public class mainController {
         partsTable.getItems().setAll(Inventory.getInstance().getAllParts());
     }
 
-    public void setProductsTable(){
-        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        productStockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
-        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
-        productTable.getItems().setAll(Inventory.getInstance().getAllParts());
-    }
+//    public void setProductsTable(){
+//        productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+//        productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+//        productStockColumn.setCellValueFactory(new PropertyValueFactory<>("stock"));
+//        productPriceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
+//        productTable.getItems().setAll(Inventory.getInstance().getAllParts());
+//    }
 
 
     private boolean confirmationMessage(String notificationText){
@@ -184,11 +184,13 @@ public class mainController {
 
 
 
-    // TODO Fix Bugs
-    /*
+
+    /**
     Bug: class com.sun.javafx.collections.ObservableListWrapper cannot be cast to class models.Part
     (com.sun.javafx.collections.ObservableListWrappers in module javafx.base of loader 'app';
     models.Part is in module SoftwareOneProject of loader 'app')
+    Cause: I was trying to append to results, basically making it as if I was trying to add an ObservableList
+    TO another ObservableList. All that was needed was simple assignment. Problem fixed.
      */
 
     public void onPartSearch() {
@@ -198,15 +200,12 @@ public class mainController {
 
         if (searchValue.length() != 0) {
 
-            results.add((Part) Main.inv.getInstance().lookupPart(searchValue));
-
             try {
                 int intSearchValue = Integer.parseInt(searchValue);
-                //   results.add((Part) Main.inv.getInstance().lookupPart(intSearchValue));
                 results = Main.inv.getInstance().lookupPart(intSearchValue);
 
             } catch (NumberFormatException notInt) {
-                results.add((Part) Main.inv.getInstance().lookupPart(searchValue));
+                results = Main.inv.getInstance().lookupPart(searchValue);
             }
 
             if (results.size() > 0) {
