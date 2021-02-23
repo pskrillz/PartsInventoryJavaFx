@@ -3,16 +3,17 @@ package _main;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import models.Inventory;
 import models.Part;
+import models.Product;
 
 public class AddProductController {
+    @FXML
+    private TextField partSearchField;
     @FXML
     private Button exitButton;
     @FXML
@@ -28,17 +29,17 @@ public class AddProductController {
     @FXML
     private TableColumn<Part, Double> partPriceColumn;
     @FXML
-    private TextField productIdColumn;
+    private TextField productIdField;
     @FXML
-    private TextField productNameColumn;
+    private TextField productNameField;
     @FXML
-    private TextField productStockColumn;
+    private TextField productStockField;
     @FXML
-    private TextField productPriceColumn;
+    private TextField productPriceField;
     @FXML
-    private TextField productMaxColumn;
+    private TextField productMaxField;
     @FXML
-    private TextField productMinColumn;
+    private TextField productMinField;
     @FXML
     private TableView<Part> associatedPartsTable;
     @FXML
@@ -104,5 +105,73 @@ public class AddProductController {
         setAssociatedPartsTable();
     }
 
+
+    public void saveProduct(){
+        // initializing all form variables in broad scope for validation handling
+        int id = 0; String name = ""; int stock = 0; double price = 0; int max = 0; int min = 0;
+
+        id = generateProductId();
+        name = productNameField.getText();
+
+        try {
+            stock = Integer.parseInt(productStockField.getText());
+            price = Double.parseDouble(productPriceField.getText());
+            max = Integer.parseInt(productMaxField.getText());
+            min = Integer.parseInt(productMinField.getText());
+        } catch (NumberFormatException numError){
+            generateError("Data Type Error: \n" +
+                    "You entered letters in a number field \n" +
+                    "Please correct your entry");
+            return;
+        }
+
+        Product newProduct = new Product(associatedPartsList, id, name, price, stock, min, max);
+
+        Main.inv.addProduct(newProduct);
+        closeWindow();
+
+
+    }
+
+
+    public void generateError(String errorText){
+        Alert inputValError = new Alert(Alert.AlertType.WARNING, errorText, ButtonType.OK);
+        inputValError.show();
+    }
+
+
+
+    public void closeWindow(){
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
+    }
+
+
+    public void onPartSearch() {
+
+        ObservableList<Part> results = FXCollections.observableArrayList();
+        String searchValue = partSearchField.getText();
+
+        if (searchValue.length() != 0) {
+
+            try {
+                int intSearchValue = Integer.parseInt(searchValue);
+                results = Main.inv.getInstance().lookupPart(intSearchValue);
+
+            } catch (NumberFormatException notInt) {
+                results = Main.inv.getInstance().lookupPart(searchValue);
+            }
+
+            if (results.size() > 0) {
+                partsTable.getItems().setAll(results);
+            } else {
+                partsTable.getItems().clear();
+
+            }
+        } else {
+            setPartsTable();
+        }
+
+    }
 
 }

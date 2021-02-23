@@ -41,6 +41,7 @@ public class AddPartController {
         if (isOutsourced == false){
             isOutsourced = true;
             this.partTypeSpecificLabel.setText("Company Name");
+            this.uniqueField.setPromptText("Enter Name");
         }
     }
 
@@ -48,6 +49,7 @@ public class AddPartController {
         if (isOutsourced == true){
             isOutsourced = false;
           this.partTypeSpecificLabel.setText("Machine ID");
+          this.uniqueField.setPromptText("Number");
       }
     }
 
