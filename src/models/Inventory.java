@@ -119,7 +119,7 @@ public class Inventory {
     public ObservableList<Part> lookupPart(String partName) {
         ObservableList<Part> results = FXCollections.observableArrayList();
         for (Part part : allParts) {
-            if (part.getName().contains(partName)) {
+            if (part.getName().toLowerCase().contains(partName.toLowerCase())) {
                 results.add(part);
             }
         }
@@ -142,7 +142,7 @@ public class Inventory {
     public ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> results = FXCollections.observableArrayList();
         for (Product product : allProducts) {
-            if (product.getName().contains(productName))
+            if (product.getName().toLowerCase().contains(productName.toLowerCase()))
                 results.add(product);
         }
         return results;
