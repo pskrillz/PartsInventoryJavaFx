@@ -179,7 +179,10 @@ public class mainController {
     Cause Theory: Unknown... literally just doing the same thing all 3 other similar functions are doing
     Solution: ModifyProductController was not hooked up to the right .fxml file
      */
-    public void openModifyProduct() throws  Exception{
+    public void openModifyProduct() throws  IOException{
+        ModifyProductController.selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+     //   ModifyProductController.selectedProduct = selectedProduct;
+     //   ModifyProductController.selectedProductPartsList = selectedProduct.getAllAssociatedParts();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();

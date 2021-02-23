@@ -27,6 +27,9 @@
             <Label layoutX="251.0" layoutY="253.0" text="Min" />
             <TextField fx:id="productMinField" promptText="Number" layoutX="291.0" layoutY="249.0" prefHeight="25.0" prefWidth="84.0" />
             <TableView fx:id="partsTable" layoutX="467.0" layoutY="65.0" prefHeight="200.0" prefWidth="344.0">
+                <placeholder>
+                    <Label text="No results found!"/>
+                </placeholder>
               <columns>
                 <TableColumn fx:id="partIdColumn" prefWidth="52.0" text="Part ID" />
                 <TableColumn fx:id="partNameColumn" prefWidth="73.0" text="Part Name" />
@@ -36,6 +39,9 @@
             </TableView>
             <Button onAction="#addAssociatedPart" fx:id="addAssociatedPartButton" layoutX="732.0" layoutY="274.0" mnemonicParsing="false" text="Add" />
             <TableView fx:id="associatedPartsTable" layoutX="467.0" layoutY="314.0" prefHeight="200.0" prefWidth="344.0">
+                <placeholder>
+                    <Label text="No results found!"/>
+                </placeholder>
               <columns>
                 <TableColumn fx:id="associatedPartId" prefWidth="59.0" text="Part ID" />
                 <TableColumn fx:id="associatedPartName" prefWidth="73.0" text="Part Name" />

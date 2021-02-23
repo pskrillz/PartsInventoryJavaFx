@@ -1,10 +1,7 @@
 package _main;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.InHouse;
 import models.Inventory;
@@ -93,18 +90,42 @@ public class ModifyPartController {
         selectedPart = index;
     }
 
-    // TODO: Need to do validation
+
 
     @FXML
     public void saveModifications() throws IOException {
+        String name; int stock = 0; double price = 0; int max = 0; int min = 0; String uniqueField = ""; int machineId = 0;
         setSelectedPart(selectedPart);
 
-        String name = this.nameField.getText();
-        int stock  = Integer.parseInt(this.invField.getText()) ;
-        double price = Double.parseDouble(this.priceField.getText());
-        int max = Integer.parseInt(this.maxField.getText());
-        int min = Integer.parseInt(this.minField.getText());
-        String uniqueField = this.uniqueField.getText();
+       name = this.nameField.getText();
+
+       try {
+           stock = Integer.parseInt(this.invField.getText());
+           price = Double.parseDouble(this.priceField.getText());
+           max = Integer.parseInt(this.maxField.getText());
+           min = Integer.parseInt(this.minField.getText());
+       } catch (NumberFormatException err){
+           generateError("You entered letters in a number field\n" +
+                   "Please correct your input before continuing");
+          return;
+       }
+
+       uniqueField = this.uniqueField.getText();
+
+        if (!(stock >= min) || !(stock <= max)){
+            generateError("Inventory Error: \n" +
+                    "Current stock must be greater than minimum supply \n" +
+                    "and less than maximum supply");
+            return;
+        }
+
+        if(min > max || max < min){
+            generateError("Inventory Error: \n" +
+                    "Minimum must be less than maximum and " +
+                    "maximum must be greater than minimum");
+            return;
+        }
+
 
         if (isOutsourced == false){
             InHouse inHousePart = new InHouse(generatePartId(), name, price, stock, min, max, Integer.parseInt(uniqueField));
@@ -127,6 +148,10 @@ public class ModifyPartController {
 
 
 
+    public void generateError(String errorText){
+        Alert inputValError = new Alert(Alert.AlertType.WARNING, errorText, ButtonType.OK);
+        inputValError.show();
+    }
 
 
 
