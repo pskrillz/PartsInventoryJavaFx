@@ -16,6 +16,7 @@ import java.io.IOException;
 import models.Inventory;
 import models.Part;
 import models.Product;
+import _main.ModifyProductController;
 
 
 /**
@@ -180,7 +181,8 @@ public class mainController {
     Solution: ModifyProductController was not hooked up to the right .fxml file
      */
     public void openModifyProduct() throws  IOException{
-        ModifyProductController.selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+        _main.ModifyProductController.selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+        ModifyProductController.selectedProductIndex = productsTable.getSelectionModel().getSelectedIndex();
      //   ModifyProductController.selectedProduct = selectedProduct;
      //   ModifyProductController.selectedProductPartsList = selectedProduct.getAllAssociatedParts();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));

@@ -51,8 +51,8 @@
                 </TableView>
                 <TextField onKeyReleased="#onPartSearch" layoutX="616.0" layoutY="25.0" prefHeight="25.0" prefWidth="179.0" promptText="Search by Part ID or Name" />
                 <Button onAction="#removeAssociatedPart" layoutX="658.0" layoutY="521.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="149.0" text="Remove Associated Part" />
-                <Button  layoutX="658.0" layoutY="552.0" mnemonicParsing="false" text="Save" />
-                <Button onAction="#closeWindow" layoutX="733.0" layoutY="552.0" mnemonicParsing="false" text="Cancel" />
+                <Button onAction="#saveProductModifications" layoutX="658.0" layoutY="552.0" mnemonicParsing="false" text="Save" />
+                <Button onAction="#closeWindow" fx:id="exitButton" layoutX="733.0" layoutY="552.0" mnemonicParsing="false" text="Cancel" />
             </children>
         </Pane>
     </children>

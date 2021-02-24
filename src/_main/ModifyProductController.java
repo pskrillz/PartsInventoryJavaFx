@@ -55,8 +55,9 @@ public class ModifyProductController {
     private Button removeAssociatedPartButton;
     @FXML
     public void initialize(){
+        selectedProductPartsList = selectedProduct.getAllAssociatedParts();
         setPartsTable();
-       setAssociatedPartsTable();
+        setAssociatedPartsTable();
         int selectedProductId = selectedProduct.getId();
         String selectedProductName = selectedProduct.getName();
         double selectedProductPrice = selectedProduct.getPrice();
@@ -74,7 +75,8 @@ public class ModifyProductController {
 
 
     public static Product selectedProduct;
-    public static ObservableList<Part> selectedProductPartsList = selectedProduct.getAllAssociatedParts();
+    public static ObservableList<Part> selectedProductPartsList;
+    public static int selectedProductIndex;
 
 
 
@@ -94,7 +96,7 @@ public class ModifyProductController {
         associatedPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         associatedPartStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
         associatedPartPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
-        associatedPartsTable.getItems().setAll(selectedProductPartsList);
+        associatedPartsTable.getItems().setAll(selectedProduct.getAllAssociatedParts());
     }
 
 
@@ -147,6 +149,33 @@ public class ModifyProductController {
         } else {
             setPartsTable();
         }
+
+    }
+
+
+    public void saveProductModifications(){
+        // initializing all form variables in broad scope for validation handling
+        int id = selectedProduct.getId(); String name = ""; int stock = 0; double price = 0; int max = 0; int min = 0;
+
+
+        name = productNameField.getText();
+
+        try {
+            stock = Integer.parseInt(productStockField.getText());
+            price = Double.parseDouble(productPriceField.getText());
+            max = Integer.parseInt(productMaxField.getText());
+            min = Integer.parseInt(productMinField.getText());
+        } catch (NumberFormatException numError){
+            generateError("Data Type Error: \n" +
+                    "You entered letters in a number field \n" +
+                    "Please correct your entry");
+            return;
+        }
+
+        Product newProduct = new Product(selectedProductPartsList, id, name, price, stock, min, max);
+        Main.inv.updateProduct(selectedProductIndex, newProduct);
+
+        closeWindow();
 
     }
 

@@ -27,9 +27,9 @@ public class Main extends Application {
         inv.addPart(new InHouse(4532, "Hydraulics",
                 329.95, 2,1,20, 83002));
 
-       inv.addProduct(new Product(null, 33, "Camry", 21000, 2, 1, 3 ));
-       inv.addProduct(new Product(null, 47, "Prius", 23000, 2, 1, 3 ));
-       inv.addProduct(new Product(null, 47, "Tesla", 50000, 2, 1, 3 ));
+       inv.addProduct(new Product(33, "Camry", 21000, 2, 1, 3 ));
+       inv.addProduct(new Product(47, "Prius", 23000, 2, 1, 3 ));
+       inv.addProduct(new Product(47, "Tesla", 50000, 2, 1, 3 ));
 
         Parent main = FXMLLoader.load(getClass().getResource("main.fxml"));
         primaryStage.setTitle("Inventory Management V1");
