@@ -105,6 +105,13 @@ public class mainController {
 
     public void deleteProduct(){
         Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
+        if (selectedProduct.getAllAssociatedParts().size() != 0 )
+        {
+            generateError("Cannot Delete Products with Associated Parts \n" +
+                    "Remove associated parts first. ");
+            return;
+        }
+
         if (confirmationMessage("Are you sure you want to delete this product?")) {
             Main.inv.deleteProduct(selectedProduct);
         }
@@ -183,8 +190,6 @@ public class mainController {
     public void openModifyProduct() throws  IOException{
         _main.ModifyProductController.selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         ModifyProductController.selectedProductIndex = productsTable.getSelectionModel().getSelectedIndex();
-     //   ModifyProductController.selectedProduct = selectedProduct;
-     //   ModifyProductController.selectedProductPartsList = selectedProduct.getAllAssociatedParts();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ModifyProduct.fxml"));
         Parent root = (Parent) fxmlLoader.load();
         Stage stage = new Stage();
@@ -226,7 +231,7 @@ public class mainController {
     }
 
 
-    private void notFoundAlert(String text){
+    private void generateError(String text){
         Alert warning = new Alert(Alert.AlertType.WARNING, text, ButtonType.OK);
         warning.show();
     }

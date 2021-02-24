@@ -94,6 +94,7 @@ public class AddProductController {
 
 
     public void addAssociatedPart(){
+
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
         associatedPartsList.add(selectedPart);
         setAssociatedPartsTable();
