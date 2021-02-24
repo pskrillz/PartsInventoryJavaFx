@@ -110,7 +110,7 @@ public class Inventory {
 
 
     /**
-     * Look up by string name and return list
+     * Look up by part Name and return list
      *
      * @param partName
      * @return
@@ -138,7 +138,13 @@ public class Inventory {
     }
 
 
-
+    /**
+     * @lookupProduct()
+     * searches inventory's product list by productname,
+     * and handle case insensitivity
+     * @param productName
+     * @return
+     */
     public ObservableList<Product> lookupProduct(String productName) {
         ObservableList<Product> results = FXCollections.observableArrayList();
         for (Product product : allProducts) {
@@ -177,26 +183,28 @@ public class Inventory {
         allProducts.set(index, newProduct);
     }
 
+
     /**
-     * Delete parts and products
-     *
+     * @deletePart()
+     * deletes specified part
      * @param part
-     * @return
      */
-
-
-
     public void deletePart(Part part) {
         allParts.remove(part);
     }
 
+    /**
+     * @deleteProduct()
+     * deletes specified product
+     * @param product
+     */
     public void deleteProduct(Product product) {
         allProducts.remove(product);
     }
 
     /**
-     * Get all parts
-     *
+     * @getAllParts()
+     * Gets all parts in inventory
      * @return
      */
 
@@ -205,8 +213,9 @@ public class Inventory {
     }
 
     /**
+     * @getAllProducts()
+     * Gets all products in inventory
      * Get all products
-     *
      * @return
      */
 

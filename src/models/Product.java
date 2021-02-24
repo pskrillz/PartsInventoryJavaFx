@@ -16,7 +16,16 @@ public class Product {
     private int min;
     private int max;
 
-
+    /**
+     * Product constructor when associated parts are specified
+     * @param associatedParts
+     * @param id
+     * @param name
+     * @param price
+     * @param stock
+     * @param min
+     * @param max
+     */
     public Product(ObservableList<Part> associatedParts, int id, String name, double price, int stock, int min, int max) {
         this.associatedParts = associatedParts;
         this.id = id;
@@ -27,6 +36,15 @@ public class Product {
         this.max = max;
     }
 
+    /**
+     * Overloaded constructor for when associated parts do not exist yet
+     * @param id
+     * @param name
+     * @param price
+     * @param stock
+     * @param min
+     * @param max
+     */
     public Product(int id, String name, double price, int stock, int min, int max) {
         this.id = id;
         this.name = name;
@@ -110,7 +128,7 @@ public class Product {
         this.associatedParts.add(part);
     }
 
-    // TODO: check if works, doc says its boolean
+
     public boolean deleteAssociatedPart(Part part){
         this.associatedParts.remove(part);
         return true;

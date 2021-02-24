@@ -57,6 +57,9 @@ public class ModifyProductController {
     private Button removeAssociatedPartButton;
     @FXML
     public void initialize(){
+        /**
+         * populates the fields with the selectedProduct's data
+         */
         selectedProductPartsList = selectedProduct.getAllAssociatedParts();
         setPartsTable();
         setAssociatedPartsTable();
@@ -91,14 +94,18 @@ public class ModifyProductController {
         });
     }
 
-
+    /**
+     * selectedProduct is passed in through the mainController
+     */
     public static Product selectedProduct;
     public static ObservableList<Part> selectedProductPartsList;
     public static int selectedProductIndex;
 
 
-
-
+    /**
+     * @setPartsTable()
+     * initializes parts table
+     */
     public void setPartsTable(){
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -107,9 +114,11 @@ public class ModifyProductController {
         partsTable.getItems().setAll(Inventory.getInstance().getAllParts());
     }
 
-
+    /**
+     * @setAssociatedPartsTable
+     * initializes selectProduct's associated parts table
+     */
     public void setAssociatedPartsTable(){
-    //    setSelectedProductPartsList(selectedProductPartsList);
         associatedPartId.setCellValueFactory(new PropertyValueFactory<>("id"));
         associatedPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
         associatedPartStock.setCellValueFactory(new PropertyValueFactory<>("stock"));
@@ -117,32 +126,49 @@ public class ModifyProductController {
         associatedPartsTable.getItems().setAll(selectedProduct.getAllAssociatedParts());
     }
 
-
+    /**
+     * @addAssociatedPart()
+     * adds an associated part to the selected product's associated parts table
+     */
     public void addAssociatedPart(){
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
         selectedProductPartsList.add(selectedPart);
         setAssociatedPartsTable();
     }
 
+    /**
+     * @removeAssociatedPart()
+     * removes an associated part from the selected product's associated parts table
+     */
     public void removeAssociatedPart(){
         Part selectedPart = associatedPartsTable.getSelectionModel().getSelectedItem();
         selectedProductPartsList.remove(selectedPart);
         setAssociatedPartsTable();
     }
 
-
+    /**
+     * method to generate error alerts
+     * @param errorText
+     */
     public void generateError(String errorText){
         Alert inputValError = new Alert(Alert.AlertType.WARNING, errorText, ButtonType.OK);
         inputValError.show();
     }
 
 
-
+    /**
+     * closes active window
+     */
     public void closeWindow(){
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * @onPartSearch()
+     * Method to handle keyboard input events on the search part's field
+     * to start searching on input
+     */
     public void onPartSearch() {
 
         ObservableList<Part> results = FXCollections.observableArrayList();
@@ -170,7 +196,10 @@ public class ModifyProductController {
 
     }
 
-
+    /**
+     * @saveProductModifications()
+     * gets all the field data to and updates the selected product with data type validation and error messages.
+     */
     public void saveProductModifications(){
         // initializing all form variables in broad scope for validation handling
         int id = selectedProduct.getId(); String name = ""; int stock = 0; double price = 0; int max = 0; int min = 0;

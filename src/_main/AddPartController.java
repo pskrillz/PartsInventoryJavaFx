@@ -136,6 +136,9 @@ public class AddPartController {
      * Problem: Trying to access method to generate and keep track of ID's for parts and products persistently saved in memory.
      * Resolution: Solution is to create a static variable-method pair to be shared between all members of the class.
      */
+    /**
+     * generates Part Id's
+     */
 
    public static int partId = 0;
     public static int generatePartId(){
@@ -144,12 +147,18 @@ public class AddPartController {
     }
 
 
-
-
+    /**
+     * closes the window
+     */
     public void closeWindow(){
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * generate errors with text as input parameter
+     * @param errorText
+     */
 
     public void generateError(String errorText){
         Alert inputValError = new Alert(Alert.AlertType.WARNING, errorText, ButtonType.OK);

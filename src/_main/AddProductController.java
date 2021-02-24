@@ -58,6 +58,9 @@ public class AddProductController {
     private Button removeAssociatedPartButton;
     @FXML
     public void initialize(){
+        /**
+         * initializes the tables
+         */
         setPartsTable();
         setAssociatedPartsTable();
 
@@ -92,7 +95,10 @@ public class AddProductController {
 
     public ObservableList<Part> associatedPartsList = FXCollections.observableArrayList();
 
-
+    /**
+     * @setPartsTable
+     * sets up the total parts table
+     */
     public void setPartsTable(){
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -101,7 +107,10 @@ public class AddProductController {
         partsTable.getItems().setAll(Inventory.getInstance().getAllParts());
     }
 
-
+    /**
+     * @setAssociatedPartsTable()
+     * sets up the associated parts table
+     */
     public void setAssociatedPartsTable(){
         associatedPartId.setCellValueFactory(new PropertyValueFactory<>("id"));
         associatedPartName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -110,7 +119,10 @@ public class AddProductController {
         associatedPartsTable.getItems().setAll(associatedPartsList);
     }
 
-
+    /**
+     * @addAssociatedPart()
+     * adds an associated part to the product's associated part attribute
+     */
     public void addAssociatedPart(){
 
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
@@ -118,13 +130,19 @@ public class AddProductController {
         setAssociatedPartsTable();
     }
 
+    /**
+     * removes an associated part to the product
+     */
     public void removeAssociatedPart(){
         Part selectedPart = associatedPartsTable.getSelectionModel().getSelectedItem();
         associatedPartsList.remove(selectedPart);
         setAssociatedPartsTable();
     }
 
-
+    /**
+     * saveProduct() method gets all the current data entered into the fields and adds a new
+     * product to the inventory based on that, with data type validation"
+     */
     public void saveProduct(){
         // initializing all form variables in broad scope for validation handling
         int id = 0; String name = ""; int stock = 0; double price = 0; int max = 0; int min = 0;
@@ -152,20 +170,27 @@ public class AddProductController {
 
     }
 
-
+    /**
+     * generate error alerts with text parameter
+     * @param errorText
+     */
     public void generateError(String errorText){
         Alert inputValError = new Alert(Alert.AlertType.WARNING, errorText, ButtonType.OK);
         inputValError.show();
     }
 
 
-
+    /**
+     * close window
+     */
     public void closeWindow(){
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
 
-
+    /**
+     * handles keyboard input events into the search field
+     */
     public void onPartSearch() {
 
         ObservableList<Part> results = FXCollections.observableArrayList();

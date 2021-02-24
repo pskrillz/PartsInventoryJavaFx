@@ -63,11 +63,17 @@ public class mainController {
     private TextField productSearchField;
     @FXML
     public void initialize(){
-
+/**
+ * initializes disabled buttons, to change when a part or product is selected.
+ */
         deletePartButton.setDisable(true);
         modifyPartButton.setDisable(true);
         deleteProductButton.setDisable(true);
         modifyProductButton.setDisable(true);
+
+        /**
+         * initializes main windows parts and products table
+         */
         setPartsTable();
         setProductsTable();
 
@@ -93,7 +99,10 @@ public class mainController {
 
     }
 
-
+    /**
+     * @deletePart()
+     * deletes the selected part from the parts table after confirmation
+     */
     public void deletePart(){
         Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
         System.out.println(selectedPart);
@@ -103,6 +112,10 @@ public class mainController {
         setPartsTable();
     }
 
+    /**
+     * @deleteProduct()
+     * deletes the selected product from the products table after confirmation
+     */
     public void deleteProduct(){
         Product selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         if (selectedProduct.getAllAssociatedParts().size() != 0 )
@@ -131,6 +144,12 @@ public class mainController {
      * Resolution: Modify project structure to include controllers and views in the same directory.
      * @throws IOException
      */
+    /**
+     * @openAddPart()
+     * Opens AddPart.fxml view to add parts.
+     * Refreshes the table on close
+     * @throws IOException
+     */
     public void openAddPart() throws IOException {
 
 
@@ -152,6 +171,11 @@ public class mainController {
      *
      * Resolution: fxml view needed a controller to be correctly connected.
      */
+    /**
+     * @openModifyPart()
+     * opens ModifyPart.fxml view and passes in selected Part to the ModifyPartController
+     * @throws Exception
+     */
     public void openModifyPart() throws Exception {
 //        if (itemSelected )
 //        {
@@ -172,7 +196,11 @@ public class mainController {
 
     }
 
-
+    /**
+     * @openAddProduct()
+     * opens AddProduct.fxml view
+     * @throws Exception
+     */
     public void openAddProduct() throws Exception{
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("AddProduct.fxml"));
         Parent root = (Parent) fxmlLoader.load();
@@ -188,6 +216,12 @@ public class mainController {
     Cause Theory: Unknown... literally just doing the same thing all 3 other similar functions are doing
     Solution: ModifyProductController was not hooked up to the right .fxml file
      */
+
+    /**
+     * @openModifyProduct()
+     * opens ModifyProduct.fxml view and passes in the selectedProduct to populate the fields.
+     * @throws IOException
+     */
     public void openModifyProduct() throws  IOException{
         _main.ModifyProductController.selectedProduct = productsTable.getSelectionModel().getSelectedItem();
         ModifyProductController.selectedProductIndex = productsTable.getSelectionModel().getSelectedIndex();
@@ -200,15 +234,18 @@ public class mainController {
     }
 
 
-
-
+    /**
+     * closes the active window
+     */
     public void closeWindow(){
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
 
 
-
+    /**
+     * Sets up the parts table
+     */
     public void setPartsTable(){
         partIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         partNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -217,6 +254,9 @@ public class mainController {
         partsTable.getItems().setAll(Inventory.getInstance().getAllParts());
     }
 
+    /**
+     * sets up the products table
+     */
     public void setProductsTable(){
         productIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         productNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -225,14 +265,23 @@ public class mainController {
         productsTable.getItems().setAll(Inventory.getInstance().getAllProducts());
     }
 
-
+    /**
+     * @confirmationMessage()
+     * method to create confirmation alerts
+     * @param notificationText
+     * @return
+     */
     private boolean confirmationMessage(String notificationText){
         Alert error = new Alert(Alert.AlertType.CONFIRMATION, notificationText, ButtonType.YES, ButtonType.NO);
         error.showAndWait();
         return error.getResult() == ButtonType.YES;
     }
 
-
+    /**
+     * @generateError()
+     * method to create error messages
+     * @return
+     */
     private void generateError(String text){
         Alert warning = new Alert(Alert.AlertType.WARNING, text, ButtonType.OK);
         warning.show();
@@ -245,7 +294,10 @@ public class mainController {
     Cause: I was trying to append to results, basically making it as if I was trying to add an ObservableList
     TO another ObservableList. All that was needed was simple assignment. Problem fixed.
      */
-
+    /**
+     * @onPartSearch()
+     * Method to handle keyboard input events on the parts search field to begin searching on input
+     */
     public void onPartSearch() {
 
         ObservableList<Part> results = FXCollections.observableArrayList();
@@ -273,9 +325,11 @@ public class mainController {
 
     }
 
-
+    /**
+     * @onProductSearch()
+     * Method to handle keyboard input events on the products search field to begin searching on input
+     */
     public void onProductSearch() {
-
         ObservableList<Product> results = FXCollections.observableArrayList();
         String searchValue = productSearchField.getText();
 

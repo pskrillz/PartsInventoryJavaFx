@@ -39,6 +39,10 @@ public class ModifyPartController {
     @FXML
     public void initialize(){
 
+        /**
+         * These methods checks to see whether the selectedPart is of which
+         * part-type class, and modifies the form based on that.
+         */
         if(Main.inv.getAllParts().get(selectedPart) instanceof InHouse){
             toggleIsNotOutsourced();
             int selectedMachineID = ((InHouse) Main.inv.getAllParts().get(selectedPart)).getMachineId();
@@ -49,6 +53,9 @@ public class ModifyPartController {
             String selectedCompanyName = ((Outsourced) Main.inv.getAllParts().get(selectedPart)).getCompanyName();
             uniqueField.setText(selectedCompanyName);
         }
+        /**
+         *  Gets the selectedPart's data and populates the textFields with it
+         */
         int selectedPartId = Main.inv.getAllParts().get(selectedPart).getId();
         String selectedPartName = Main.inv.getAllParts().get(selectedPart).getName();
         double selectedPartPrice = Main.inv.getAllParts().get(selectedPart).getPrice();
@@ -64,8 +71,15 @@ public class ModifyPartController {
         maxField.setText(String.valueOf(selectedPartMax));
     }
 
+    /**
+     * selectedPart passed in from main Controller
+     */
     static int selectedPart;
 
+    /**
+     * boolean state tracker of whether the product is outsourced or not
+     * and the ability to toggle between
+     */
     public boolean isOutsourced;
 
     public void toggleIsOutsourced(){
@@ -84,9 +98,12 @@ public class ModifyPartController {
     }
 
 
-
-
-
+    /**
+     * @saveModifications()
+     * Gets all the inputted textField data and parses it into the right data type for the
+     * part type, includes EAFP (easier to ask for forgiveness than permission) error handling
+     * @throws IOException
+     */
     @FXML
     public void saveModifications() throws IOException {
         String name = ""; int stock = 0; double price = 0; int max = 0; int min = 0; String uniqueField = ""; int machineId = 0;
@@ -107,6 +124,10 @@ public class ModifyPartController {
 
        uniqueField = this.uniqueField.getText();
 
+        /**
+         * generates "Inventory Errors" when the min max and current inventory levels
+         * don't follow proper logic
+         */
         if (!(stock >= min) || !(stock <= max)){
             generateError("Inventory Error: \n" +
                     "Current stock must be greater than minimum supply \n" +
@@ -142,15 +163,19 @@ public class ModifyPartController {
     }
 
 
-
-
+    /**
+     * generate error alert for modifyPart
+     * @param errorText
+     */
     public void generateError(String errorText){
         Alert inputValError = new Alert(Alert.AlertType.WARNING, errorText, ButtonType.OK);
         inputValError.show();
     }
 
 
-
+    /**
+     * generate part Id's
+     */
     public static int partId = 0;
     public static int generatePartId(){
         partId++;
@@ -158,8 +183,9 @@ public class ModifyPartController {
     }
 
 
-
-
+    /**
+     * close window method
+     */
     public void closeWindow(){
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
