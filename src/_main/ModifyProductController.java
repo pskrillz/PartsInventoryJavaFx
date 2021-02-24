@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import models.Inventory;
 import models.Part;
@@ -71,6 +73,22 @@ public class ModifyProductController {
         productPriceField.setText(String.valueOf(selectedProductPrice));
         productMinField.setText(String.valueOf(selectedProductMin));
         productMaxField.setText(String.valueOf(selectedProductMax));
+
+        /**
+         * Set buttons to being enabled only if item is selected
+         * in respective table.
+         */
+        partsTable.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                // add and delete buttons are only enabled if an item is selected
+                addAssociatedPartButton.setDisable(false);
+            }
+        });
+        associatedPartsTable.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                removeAssociatedPartButton.setDisable(false);
+            }
+        });
     }
 
 
@@ -107,7 +125,7 @@ public class ModifyProductController {
     }
 
     public void removeAssociatedPart(){
-        Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+        Part selectedPart = associatedPartsTable.getSelectionModel().getSelectedItem();
         selectedProductPartsList.remove(selectedPart);
         setAssociatedPartsTable();
     }

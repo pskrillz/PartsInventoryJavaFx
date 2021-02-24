@@ -36,6 +36,19 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(main, 1010, 375));
         primaryStage.show();
 
+        /**
+         * Feature to Add in Future Version:
+         * If I were to add a feature to this application I would create an inventory backlog
+         * list which would indicate which items (parts and products) that need stock replenishment;
+         * Basically, when the stock on any particular item gets to be within
+         * the MIN specified, that item will go to the backlog for an admin
+         * to basically have a checklist of items that need to be replenished.
+         *
+         * This could also be automated, so that stock is always within the right amounts,
+         * specified.
+         */
+
+
     }
 
     public static void main(String[] args){

@@ -72,7 +72,7 @@ public class mainController {
         setProductsTable();
 
         /** this sets an event listener to the table to detect if an item is selected
-         *
+         * before enabling buttons.
          */
         partsTable.setOnMouseClicked((MouseEvent event) -> {
             if(event.getButton().equals(MouseButton.PRIMARY)){
@@ -161,6 +161,7 @@ public class mainController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding(event -> setPartsTable());
 
 
 //        }else{
@@ -195,6 +196,7 @@ public class mainController {
         Stage stage = new Stage();
         stage.setScene(new Scene(root));
         stage.show();
+        stage.setOnHiding(event -> setProductsTable());
     }
 
 

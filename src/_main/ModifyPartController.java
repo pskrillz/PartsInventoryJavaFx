@@ -69,6 +69,7 @@ public class ModifyPartController {
     public boolean isOutsourced;
 
     public void toggleIsOutsourced(){
+        isOutsourced = true;
         radioOutsourced.setSelected(true);
         this.partTypeSpecificLabel.setText("Company Name");
 
@@ -76,6 +77,7 @@ public class ModifyPartController {
     }
 
     public void toggleIsNotOutsourced(){
+        isOutsourced = false;
         radioInHouse.setSelected(true);
         this.partTypeSpecificLabel.setText("Machine ID");
 
@@ -85,17 +87,10 @@ public class ModifyPartController {
 
 
 
-
-    static void setSelectedPart(int index){
-        selectedPart = index;
-    }
-
-
-
     @FXML
     public void saveModifications() throws IOException {
-        String name; int stock = 0; double price = 0; int max = 0; int min = 0; String uniqueField = ""; int machineId = 0;
-        setSelectedPart(selectedPart);
+        String name = ""; int stock = 0; double price = 0; int max = 0; int min = 0; String uniqueField = ""; int machineId = 0;
+
 
        name = this.nameField.getText();
 
@@ -135,7 +130,8 @@ public class ModifyPartController {
             System.out.println(Inventory.getInstance().getAllParts());
 
         } else if (isOutsourced){
-                Outsourced outsourcedPart = new Outsourced(1, name, price, stock, min, max, uniqueField);
+
+                Outsourced outsourcedPart = new Outsourced(generatePartId(), name, price, stock, min, max, uniqueField);
                 Inventory.getInstance().updatePart(selectedPart, outsourcedPart);
                 System.out.println(outsourcedPart.getName() + " " + outsourcedPart.getId());
         }

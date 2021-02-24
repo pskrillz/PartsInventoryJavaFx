@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import models.Inventory;
@@ -58,6 +60,22 @@ public class AddProductController {
     public void initialize(){
         setPartsTable();
         setAssociatedPartsTable();
+
+        /**
+         * Set buttons to being enabled only if item is selected
+         */
+        partsTable.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                System.out.println(partsTable.getSelectionModel().getSelectedItem());
+                // add and delete buttons are only enabled if an item is selected
+                addAssociatedPartButton.setDisable(false);
+            }
+        });
+        associatedPartsTable.setOnMouseClicked((MouseEvent event) -> {
+            if(event.getButton().equals(MouseButton.PRIMARY)){
+                removeAssociatedPartButton.setDisable(false);
+            }
+        });
     }
 
 
@@ -101,7 +119,7 @@ public class AddProductController {
     }
 
     public void removeAssociatedPart(){
-        Part selectedPart = partsTable.getSelectionModel().getSelectedItem();
+        Part selectedPart = associatedPartsTable.getSelectionModel().getSelectedItem();
         associatedPartsList.remove(selectedPart);
         setAssociatedPartsTable();
     }
